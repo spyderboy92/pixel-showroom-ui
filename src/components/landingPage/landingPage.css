@@ -1,0 +1,110 @@
+.layout {
+  min-height: 100vh;
+}
+
+.logo {
+  float: left;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 64px;
+}
+
+.ant-layout-header {
+  display: flex;
+  align-items: center;
+}
+
+.ant-upload {
+  margin-top: 20px;
+}
+
+.ant-btn {
+  background-color: #1890ff;
+  color: white;
+  border: none;
+}
+
+.ant-btn:hover {
+  background-color: #40a9ff;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.logo span {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+}
+
+.ant-menu {
+  flex-grow: 1;
+  justify-content: flex-end;
+  background: transparent; /* Make menu background blend with header */
+  border-bottom: none; /* Remove the default bottom border */
+}
+
+/* .layout {
+  background-image: url("../Images/Screenshot\ 2024-12-21\ 072512.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 100vh;
+  color: white;
+} */
+
+.content-background {
+  background-image: url("../Images/Screenshot\ 2024-12-21\ 075649.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: calc(100vh - 64px); /* Full height minus navbar */
+  padding: 50px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  min-height: calc(100vh - 64px); /* Adjust for header height */
+  text-align: center;
+}
+
+.content-background .ant-typography {
+  margin-bottom: 20px; /* Space between elements */
+}
+
+.content-background button {
+  min-width: 200px; /* Ensure button width */
+}
+
+.content-background p {
+  max-width: 600px;
+  margin: 20px 0;
+}
+
+@media (max-width: 768px) {
+  .content-background {
+    padding: 30px;
+  }
+
+  .content-background h1 {
+    font-size: 36px;
+  }
+
+  .content-background p {
+    font-size: 16px;
+  }
+
+  .content-background button {
+    min-width: 150px;
+  }
+}

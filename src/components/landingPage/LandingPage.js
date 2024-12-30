@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Layout, Typography, Button, Spin, Image } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import UploadModal from "./uploadModal";
+import UploadModal from "../UploadModal/uploadModal";
 import "./landingPage.css";
 import axios from "axios";
 

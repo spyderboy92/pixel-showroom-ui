@@ -1,12 +1,20 @@
 import React from "react";
 import { Modal, Upload, Button, Form, Select } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
+import "./uploadModal.css";
 
 const { Option } = Select;
 
 const UploadModal = ({ isVisible, handleOk, handleCancel, handleUpload }) => {
   const [form] = Form.useForm();
 
+  const validateFileSize = (file) => {
+    const isLt10MB = file.size / 1024 / 1024 < 10;
+    if (!isLt10MB) {
+      console.error("File size must be less than 10MB!");
+    }
+    return isLt10MB || Upload.LIST_IGNORE;
+  };
   const onOk = () => {
     form
       .validateFields()
@@ -46,7 +54,12 @@ const UploadModal = ({ isVisible, handleOk, handleCancel, handleUpload }) => {
           <Upload
             name="car_image"
             listType="picture"
-            onChange={handleUpload}
+            beforeUpload={(file) => {
+              validateFileSize(file);
+              return false; // Prevent automatic upload
+            }}
+            onChange={(info) => console.log("Car image selected:", info)}
+            // onChange={handleUpload}
             maxCount={1}
           >
             <Button icon={<UploadOutlined />}>Upload Car Image</Button>
@@ -58,7 +71,11 @@ const UploadModal = ({ isVisible, handleOk, handleCancel, handleUpload }) => {
           <Upload
             name="logo"
             listType="picture"
-            onChange={handleUpload}
+            beforeUpload={(file) => {
+              validateFileSize(file);
+              return false; // Prevent automatic upload
+            }}
+            onChange={(info) => console.log("Car logo selected:", info)}
             maxCount={1}
           >
             <Button icon={<UploadOutlined />}>Upload Logo</Button>
@@ -74,7 +91,11 @@ const UploadModal = ({ isVisible, handleOk, handleCancel, handleUpload }) => {
           <Upload
             name="background"
             listType="picture"
-            onChange={handleUpload}
+            beforeUpload={(file) => {
+              validateFileSize(file);
+              return false; // Prevent automatic upload
+            }}
+            onChange={(info) => console.log("Background selected:", info)}
             maxCount={1}
           >
             <Button icon={<UploadOutlined />}>Upload Background</Button>

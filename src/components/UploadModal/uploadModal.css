@@ -1,0 +1,12 @@
+/* Change background color of the upload preview area */
+.ant-upload-list-picture .ant-upload-list-item {
+  background-color: #f0f8ff !important; /* Light blue background */
+  color: #333 !important; /* Dark text for contrast */
+  border: 1px solid #007bff !important; /* Blue border */
+  border-radius: 4px; /* Rounded corners for better design */
+}
+
+/* Hover effect for the preview area */
+.ant-upload-list-picture .ant-upload-list-item:hover {
+  background-color: #e0f7fa !important; /* Lighter blue on hover */
+}

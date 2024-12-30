@@ -20,11 +20,8 @@ const LandingPage = () => {
   const handleOk = async (formData) => {
     try {
       setIsModalOpen(false); // Close the modal
-      // formData.resetFields();
-
       setIsLoading(true); // Start loading state
 
-      // Prepare payload using FormData
       const payload = new FormData();
 
       if (formData.car_image?.file) {
@@ -40,15 +37,8 @@ const LandingPage = () => {
       }
       payload.append("logo_position", formData.logo_position || "top-right");
 
-      console.log("Payload being sent:");
-      for (let [key, value] of payload.entries()) {
-        console.log(`${key}:`, value);
-      }
-
-      // API URL
       const url = "http://54.162.137.71/api/v1/process-car-image";
 
-      // Send request
       const response = await axios.post(url, payload, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -56,9 +46,6 @@ const LandingPage = () => {
         responseType: "blob",
       });
 
-      console.log("API response:", response.data);
-
-      // Update UI with the response
       const imageUrl = URL.createObjectURL(response.data);
       setResultImage(imageUrl || response.data.image_base64);
     } catch (error) {
@@ -74,8 +61,6 @@ const LandingPage = () => {
 
   const handleCancel = () => {
     setIsModalOpen(false);
-
-    console.log("Modal Cancel clicked");
   };
 
   return (
@@ -122,9 +107,7 @@ const LandingPage = () => {
           sell.
         </Text>
 
-        {/* Display Loading Spinner or Result Image */}
         <div style={{ marginTop: "30px" }}>
-          {isLoading && <Spin size="large" />}
           {resultImage && (
             <div style={{ marginTop: "20px", textAlign: "center" }}>
               <Image
@@ -144,15 +127,13 @@ const LandingPage = () => {
               >
                 Processed Image Successfully Received
               </Text>
-
-              {/* Download Button */}
               <Button
                 type="primary"
                 style={{ marginTop: "20px" }}
                 onClick={() => {
                   const link = document.createElement("a");
                   link.href = resultImage; // Use the Blob URL
-                  link.download = "processed_image.png"; // Default file name
+                  link.download = "processed_image.png";
                   document.body.appendChild(link);
                   link.click();
                   document.body.removeChild(link);
@@ -172,7 +153,26 @@ const LandingPage = () => {
         handleCancel={handleCancel}
       />
 
-      {/* Footer */}
+      {/* Full-Screen Loader */}
+      {isLoading && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            zIndex: 1000,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Spin size="large" style={{ color: "#fff" }} />
+        </div>
+      )}
+
       <Footer style={{ textAlign: "center" }}>Pixel ShowRoom©2024</Footer>
     </Layout>
   );

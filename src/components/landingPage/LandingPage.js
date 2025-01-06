@@ -25,19 +25,24 @@ const LandingPage = () => {
       const payload = new FormData();
 
       if (formData.car_image?.file) {
-        payload.append("car_image", formData.car_image.file.originFileObj);
+        payload.append("car_image", formData.car_image.file); // No need for `.originFileObj` if it is already set
       } else {
         throw new Error("Car image is required");
       }
+
       if (formData.logo?.file) {
-        payload.append("logo", formData.logo.file.originFileObj);
+        payload.append("logo", formData.logo.file);
       }
+
       if (formData.background?.file) {
-        payload.append("background", formData.background.file.originFileObj);
+        payload.append("background", formData.background.file);
       }
+
       payload.append("logo_position", formData.logo_position || "top-right");
 
-      const url = "http://54.162.137.71/api/v1/process-car-image";
+      console.log("Payload being sent:", payload);
+
+      const url = "http://35.169.238.51/api/v1/process-car-image";
 
       const response = await axios.post(url, payload, {
         headers: {
@@ -47,7 +52,7 @@ const LandingPage = () => {
       });
 
       const imageUrl = URL.createObjectURL(response.data);
-      setResultImage(imageUrl || response.data.image_base64);
+      setResultImage(imageUrl);
     } catch (error) {
       if (error.response) {
         console.error("Error response from server:", error.response.data);
